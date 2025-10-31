@@ -18,8 +18,17 @@ def main():
         time.sleep(2)
         print("\nWould You Like To Chose Another Program Again? (y/n): ")
         user_choice = input()
+        if os.name == 'posix':
+            os.system("clear")
+        elif os.name == 'nt':
+            os.system("cls")
         if user_choice == 'y':
-              main()
+              if os.name == 'posix':
+                os.system("clear")
+                main()
+              elif os.name == 'nt':
+                os.system("cls")
+                main()
         elif user_choice == 'n':
               if os.name == 'posix':
                 os.system("clear")
@@ -29,7 +38,29 @@ def main():
                 sys.exit(0)
         elif user_choice != 'n' or 'y':
               print("Invalid Answer Chose Again")
-              again()
+              again_else()
+              
+
+
+    def again_else():
+         time.sleep(2)
+         print("\nWould You Like To Chose Another Program Again? (y/n): ")
+         user_choice = input()
+         if user_choice == 'y':
+            if os.name == 'posix':
+                os.system("clear")
+                main()
+            elif os.name == 'nt':
+                os.system("cls")
+                main()
+            elif user_choice == 'n':
+              if os.name == 'posix':
+                os.system("clear")
+              elif os.name == 'nt':
+                os.system("cls")
+                sys.exit(0)
+
+
     
     def user_help():
         print("Welcome To The Fish Multitool, A Simple And Easy Way To Get Tasks Done More Effectively! Made By BootlegFish, This Is A Pretty Basic But Useful Program")
@@ -106,16 +137,19 @@ def main():
     
 
     def userinput():
-        print("Options: \n 1. Info \n 2. Send A Discord Webhook \n 3. Spam A Discord Webhook")
+        print("Options: \n 0. Exit \n 1. Info \n 2. Send A Discord Webhook \n 3. Spam A Discord Webhook \n 4. Find Webhook Information")
         choice = input()
-        if choice == '1':
+        if choice == '0':
+            sys.exit(0)
+        elif choice == '1':
             user_help()
-        elif choice == '2':
+        elif choice == '2':    
             send_webhook()
         elif choice == '3':
-             spam_webhook()
+            spam_webhook()
         elif choice == '4':
-             sys.exit(0)
+            webhook_info()
+
 
 
     
